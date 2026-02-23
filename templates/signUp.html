@@ -1,0 +1,20 @@
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@4.2.0/index.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+{% block mainContent  %}
+<div style="display: flex; justify-content: center; align-items:center;">
+
+    <div class='w-[500px]'>
+        
+        <form method="POST" action = "{% url 'register' %}">
+            {% csrf_token %} 
+            {{f}}
+
+           <button type="submit" style="border:1px solid blue; padding:10px 70px">Sign Up</button>
+        </form>
+
+        
+    </div>
+</div>
+
+{% endblock mainContent  %}
