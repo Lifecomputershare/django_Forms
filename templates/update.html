@@ -6,15 +6,14 @@
     <title>Document</title>
 </head>
 <body>
+    <form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+        <button type="submit">Update</button>
+    </form>
 
 
 
-
-    {% for user in  users %}
-        <h1>User Name : {{user.name}}</h1>
-        <h1>User Email : {{user.email}}</h1>
-         <a href="{% url 'update' user.id %}">Update</a>
-    {% endfor %}
     
 </body>
 </html>

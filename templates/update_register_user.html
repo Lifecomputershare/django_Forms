@@ -7,14 +7,11 @@
 </head>
 <body>
 
-
-
-
-    {% for user in  users %}
-        <h1>User Name : {{user.name}}</h1>
-        <h1>User Email : {{user.email}}</h1>
-         <a href="{% url 'update' user.id %}">Update</a>
-    {% endfor %}
+    <form method='POST'>
+        {% csrf_token %}
+        {{form}}
+        <button type="submit">Update</button>
+    </form>
     
 </body>
 </html>

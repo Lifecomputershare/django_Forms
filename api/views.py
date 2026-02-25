@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from http import HTTPStatus
 
@@ -68,3 +68,44 @@ def AllUsers(request):
     }
 
     return render(request,'alluser.html',context)
+
+
+
+def update_user(request,id):
+    register_user = get_object_or_404(Register,id=id)
+
+    if request.method == "POST":
+        form = RegisterForm(request.POST, instance=register_user)
+        if form.is_valid():
+            form.save()
+            return redirect('users')
+        
+    else:
+        form = RegisterForm(instance = register_user)
+    return render(request,'update.html',{'form':form})
+
+
+
+def delete_user(request,id):
+    user = Register.objects.get(id = id)
+    if request.method == "POST":
+        user.delete()
+        return redirect('users')
+    return render(request, 'delete.html', {'form': user})
+
+
+
+
+
+
+
+def Update_Register_User(request, name):
+    user = get_object_or_404(Register,id=name)
+    if request.method == "POST":
+        data = RegisterForm(request.POST, instance=user)
+        if data.is_valid():
+            data.save()
+            return redirect('users')
+    else:
+        form = RegisterForm(instance=user)
+    return render(request,'update_register_user.html',{'form':form})
