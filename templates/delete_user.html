@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form method="POST">
+        {% csrf_token %}
+        <h1>User Deleted !!</h1>
+        <p>Are you sure ' {{user.name}}</p>
+
+        <button type="submit">Yes ,Delete</button>
+        <a href="{% url 'users' %}">Cancle</a>
+    </form>
+    
+</body>
+</html>

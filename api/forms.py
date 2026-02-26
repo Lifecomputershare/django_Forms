@@ -9,3 +9,7 @@ class RegisterForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class':'hello','placeholder':'Enter your name'}),
             'email': forms.EmailInput(attrs={'class':'email_field','placeholder':'Enter your email'})
         }
+        labels = {
+            'name':"Full Name",
+            'email':"E-mail"
+        }
