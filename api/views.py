@@ -1,10 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
+
+
 from http import HTTPStatus
+from django.views.generic import DeleteView, CreateView,UpdateView,DetailView
 
 from .forms import RegisterForm
 
 from .models import Register
+
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -60,13 +65,12 @@ def SignUp(request):
     else:
         return render(request,'signUp.html',{'form':form})
     
-
+@login_required(login_url='accounts/login')
 def AllUsers(request):
     users = Register.objects.all()
     context  = {
         'users':users
     }
-
     return render(request,'alluser.html',context)
 
 
@@ -109,3 +113,17 @@ def Update_Register_User(request, name):
     else:
         form = RegisterForm(instance=user)
     return render(request,'update_register_user.html',{'form':form})
+
+
+
+
+# For Delete User
+
+def Delete_User(request, id):
+    user = get_object_or_404(Register, id = id)
+    if request.method == "POST":
+        user.delete()
+        return redirect('users')
+    return render(request, 'delete_user.html',{'user':user})
+    
+    
